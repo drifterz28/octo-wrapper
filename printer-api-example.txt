@@ -1,0 +1,64 @@
+{
+    "job": {
+        "averagePrintTime": 43650.97941206209,
+        "estimatedPrintTime": 42968.685722013295,
+        "filament": {
+            "tool0": {
+                "length": 37540.97364807245,
+                "volume": 90.29662350075358
+            }
+        },
+        "file": {
+            "date": 1589472826,
+            "display": "vase.gcode",
+            "name": "vase.gcode",
+            "origin": "local",
+            "path": "vase.gcode",
+            "size": 14988484
+        },
+        "lastPrintTime": 43650.97941206209,
+        "user": "drifterz28"
+    },
+    "progress": {
+        "completion": 100,
+        "filepos": 14988484,
+        "printTime": 43651,
+        "printTimeLeft": 0,
+        "printTimeLeftOrigin": null
+    },
+    "state": "Operational"
+}
+
+{
+    "sd": {
+        "ready": true
+    },
+    "state": {
+        "flags": {
+            "cancelling": false,
+            "closedOrError": false,
+            "error": false,
+            "finishing": false,
+            "operational": true,
+            "paused": false,
+            "pausing": false,
+            "printing": true,
+            "ready": false,
+            "resuming": false,
+            "sdReady": true
+        },
+        "text": "Printing"
+    },
+    "temperature": {
+        "bed": {
+            "actual": 20.62,
+            "offset": 0,
+            "target": 60.0
+        },
+        "tool0": {
+            "actual": 20.62,
+            "offset": 0,
+            "target": 0.0
+        }
+    }
+}
