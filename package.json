@@ -6,7 +6,7 @@
   "author": "Chris Whitney <drifterz28@users.noreply.github.com>",
   "scripts": {
     "dev": "nodemon ./index.js",
-    "run": "node ./index.js"
+    "start": "node ./index.js"
   },
   "license": "MIT",
   "dependencies": {
