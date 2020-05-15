@@ -50,6 +50,13 @@ const server = http.createServer((req, response) => {
     data.push(chunk);
   });
   req.on("end", async () => {
+    if(data.length < 1) {
+      response.writeHead(401, {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      });
+      response.end(JSON.stringify({"error": "missing arguments"}));
+    }
     const printStatus = await getApiData(JSON.parse(data));
     response.writeHead(200, {
       "Content-Type": "application/json",
