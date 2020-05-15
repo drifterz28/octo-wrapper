@@ -49,6 +49,7 @@ const header = {
 };
 const server = http.createServer(async (req, response) => {
   const {url, key} = req.headers;
+  console.log({url, key})
   if(!url || !key) {
     response.writeHead(401, header);
     response.end(JSON.stringify({"error": "missing arguments"}));
