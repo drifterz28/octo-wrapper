@@ -44,22 +44,18 @@ const getApiData = async ({ url, key }) => {
   };
 };
 
-const server = http.createServer((req, response) => {
-  const data = [];
-  req.on("data", (chunk) => {
-    data.push(chunk);
+const server = http.createServer(async (req, response) => {
+  const {url, key} = req.headers;
+  console.log(req.headers)
+  response.writeHead(401, {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
   });
-  req.on("end", async () => {
-    response.writeHead(401, {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-    });
-    if(data.length < 1) {
-      response.end(JSON.stringify({"error": "missing arguments"}));
-    }
-    const printStatus = await getApiData(JSON.parse(data));
-    response.end(JSON.stringify(printStatus));
-  });
+  if(!url || !key) {
+    response.end(JSON.stringify({"error": "missing arguments"}));
+  }
+  const printStatus = await getApiData({url, key});
+  response.end(JSON.stringify(printStatus));
 });
 server.on("clientError", (err, socket) => {
   socket.end("HTTP/1.1 400 Bad Request\r\n\r\n");
