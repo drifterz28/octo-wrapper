@@ -3,6 +3,16 @@ require("isomorphic-fetch");
 const http = require("http");
 const port = process.env.PORT || 5000;
 
+const testData = {
+  bed: 60.62,
+  tool0: 205.4,
+  state: 'Printing',
+  printTime: 4365,
+  printTimeLeft: 456,
+  name: 'vase.gcode',
+  completion: 54.34
+}
+
 const jobAdapter = ({ job, progress, state }) => {
   const { printTime, printTimeLeft, completion } = progress;
   const name = job.file.name;
@@ -49,10 +59,16 @@ const header = {
 };
 const server = http.createServer(async (req, response) => {
   const {url, key} = req.headers;
+  if(url === 'test') {
+    response.writeHead(200, header);
+    response.end(JSON.stringify(testData));
+    return;
+  }
   console.log(req.headers)
   if(!url || !key) {
     response.writeHead(401, header);
     response.end(JSON.stringify({"error": "missing arguments"}));
+    return;
   }
   try {
     response.writeHead(200, header);
