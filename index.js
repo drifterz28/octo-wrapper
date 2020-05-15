@@ -43,19 +43,25 @@ const getApiData = async ({ url, key }) => {
     ...printer,
   };
 };
-
+const header = {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+};
 const server = http.createServer(async (req, response) => {
   const {url, key} = req.headers;
-  console.log(req.headers)
-  response.writeHead(401, {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-  });
   if(!url || !key) {
+    response.writeHead(401, header);
     response.end(JSON.stringify({"error": "missing arguments"}));
   }
-  const printStatus = await getApiData({url, key});
-  response.end(JSON.stringify(printStatus));
+  try {
+    response.writeHead(200, header);
+    const printStatus = await getApiData({url, key});
+    response.end(JSON.stringify(printStatus));
+  } catch(err => {
+    response.writeHead(500, header);
+    response.end(JSON.stringify({"error": "not sure, time to look at the logs"}));
+  })
+
 });
 server.on("clientError", (err, socket) => {
   socket.end("HTTP/1.1 400 Bad Request\r\n\r\n");
