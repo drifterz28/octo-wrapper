@@ -57,10 +57,10 @@ const server = http.createServer(async (req, response) => {
     response.writeHead(200, header);
     const printStatus = await getApiData({url, key});
     response.end(JSON.stringify(printStatus));
-  } catch(err => {
+  } catch(err) {
     response.writeHead(500, header);
     response.end(JSON.stringify({"error": "not sure, time to look at the logs"}));
-  })
+  }
 
 });
 server.on("clientError", (err, socket) => {
