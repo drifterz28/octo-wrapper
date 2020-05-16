@@ -21,7 +21,7 @@ const jobAdapter = ({ job, progress, state }) => {
     printTime,
     printTimeLeft,
     completion: completion.toFixed(2),
-    name,
+    name: name.split('.')[0],
     state,
   };
 };
@@ -29,8 +29,8 @@ const jobAdapter = ({ job, progress, state }) => {
 const printerAdapter = ({ temperature }) => {
   if(Object.keys(temperature).length < 1) return {};
   return {
-    bed: temperature.bed.actual,
-    tool0: temperature.tool0.actual
+    bed: temperature.bed.actual.toFixed(2),
+    tool0: temperature.tool0.actual.toFixed(2)
   };
 };
 
